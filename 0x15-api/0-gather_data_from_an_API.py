@@ -1,12 +1,8 @@
 #!/usr/bin/python3
 """
-Returns to-do list information for a given employee ID.
+Fetches and displays information about an employee
 
-Usage: python3 0-gather_data_from_an_API.py employee_id
-
-EMPLOYEE_NAME: name of the employee
-NUMBER_OF_DONE_TASKS: number of completed tasks
-TOTAL_NUMBER_OF_TASKS: total number of tasks, which is the sum of completed and non-completed tasks
+API: https://jsonplaceholder.typicode.com/
 """
 import requests
 import sys
