@@ -1,5 +1,13 @@
 #!/usr/bin/python3
-"""Returns to-do list information for a given employee ID."""
+"""
+Returns to-do list information for a given employee ID.
+
+Usage: python3 0-gather_data_from_an_API.py employee_id
+
+EMPLOYEE_NAME: name of the employee
+NUMBER_OF_DONE_TASKS: number of completed tasks
+TOTAL_NUMBER_OF_TASKS: total number of tasks, which is the sum of completed and non-completed tasks
+"""
 import requests
 import sys
 
