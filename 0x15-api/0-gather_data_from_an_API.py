@@ -2,16 +2,30 @@
 """Returns to-do list information for a given employee ID."""
 import requests
 import sys
-if __name__ == "__main__":
-    url = "https://jsonplaceholder.typicode.com/"
+
+if len(sys.argv) != 2:
+    print("Please provide an employee ID as a parameter.")
+    exit()
+
+employee_id = sys.argv[1]
+
+try:
     user_response = requests.get(
-        f"https://jsonplaceholder.typicode.com/users/{sys.argv[1]}")
-user = user_response.json()
-todos_response = requests.get(
-    f"https://jsonplaceholder.typicode.com/todos?userId={sys.argv[1]}")
-todos = todos_response.json()
-completed_tasks = [task['title'] for task in todos if task['completed']]
-print(
-    f"Employee {user['name']} is done with tasks({len(completed_tasks)}/{len(todos)}):")
-for task in completed_tasks:
-    print(f"\t{task}")
+        f"https://jsonplaceholder.typicode.com/users/{employee_id}")
+    user_response.raise_for_status()
+    user = user_response.json()
+
+    todos_response = requests.get(
+        f"https://jsonplaceholder.typicode.com/todos?userId={employee_id}")
+    todos_response.raise_for_status()
+    todos = todos_response.json()
+
+    completed_tasks = [task['title'] for task in todos if task['completed']]
+    total_tasks = len(todos)
+
+    print(f"Employee {user['name']} is done with tasks({len(completed_tasks)}/{total_tasks}):")
+    for task in completed_tasks:
+        print(f"\t{task}")
+
+except requests.exceptions.HTTPError as e:
+    print(f"Error: {e}")
